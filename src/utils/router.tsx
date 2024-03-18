@@ -1,13 +1,6 @@
 import { RouterProvider, createHashRouter } from "react-router-dom";
-import LoginPage from "../pages/LoginPage";
-import MainPage from "../pages/MainPage";
-import RedirectPage from "../pages/RedirectPage";
 
-const router = createHashRouter([
-  { path: "/", element: <LoginPage /> },
-  { path: "/main", element: <MainPage /> },
-  { path: "*", element: <RedirectPage /> },
-]);
+const router = createHashRouter([{ path: "/", element: <h1>hola</h1> }]);
 
 const MainRouter = () => {
   return <RouterProvider router={router} />;
