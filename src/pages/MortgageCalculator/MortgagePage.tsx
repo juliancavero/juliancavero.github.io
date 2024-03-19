@@ -1,5 +1,4 @@
 import {
-  Container,
   Grid,
   Slider,
   ToggleButton,
@@ -53,8 +52,8 @@ export const MortgagePage = () => {
   return (
     <StyledContainer>
       <h1>Calculadora de hipotecas</h1>
-      <Grid container spacing={2} alignItems={"flex-start"}>
-        <Grid container item xs={12} sm={6} alignItems={"center"} spacing={2}>
+      <Grid container spacing={5} alignItems={"flex-start"}>
+        <Grid container item xs={12} lg={6} alignItems={"center"} spacing={2}>
           <Grid item xs={12} container alignItems={"center"}>
             <Grid item xs={5}>
               <Typography variant="h5">Precio del inmueble</Typography>
@@ -152,7 +151,7 @@ export const MortgagePage = () => {
             </Grid>
           )}
         </Grid>
-        <Grid container item xs={12} sm={6} alignItems={"center"} spacing={2}>
+        <Grid container item xs={12} lg={6} alignItems={"center"} spacing={2}>
           <Grid item xs={12}>
             <Typography variant="h4">Resultados</Typography>
           </Grid>
@@ -160,7 +159,13 @@ export const MortgagePage = () => {
             <Grid item xs={6}>
               <Typography variant="h4">Cuota mensual</Typography>
             </Grid>
-            <Grid item xs={6} justifyContent={"flex-end"} container>
+            <Grid
+              item
+              xs={6}
+              justifyContent={"flex-end"}
+              container
+              sx={{ backgroundColor: "#acb79b" }}
+            >
               <Typography variant="h3">
                 {numberToCurrency(mortgageCalculations.monthlyPayment)}€
               </Typography>
@@ -170,7 +175,13 @@ export const MortgagePage = () => {
             <Grid item xs={6}>
               <Typography variant="h5">Coste total del inmueble</Typography>
             </Grid>
-            <Grid item xs={6} justifyContent={"flex-end"} container>
+            <Grid
+              item
+              xs={6}
+              justifyContent={"flex-end"}
+              container
+              sx={{ backgroundColor: "#8fbc8f" }}
+            >
               <Typography variant="h4">
                 {numberToCurrency(mortgageCalculations.finalPrice)}€
               </Typography>
@@ -180,7 +191,13 @@ export const MortgagePage = () => {
             <Grid item xs={6}>
               <Typography variant="h5">Coste de la hipoteca</Typography>
             </Grid>
-            <Grid item xs={6} justifyContent={"flex-end"} container>
+            <Grid
+              item
+              xs={6}
+              justifyContent={"flex-end"}
+              container
+              sx={{ backgroundColor: "#acb79b" }}
+            >
               <Typography variant="h4">
                 {numberToCurrency(mortgageCalculations.mortgageCost)}€
               </Typography>
@@ -196,10 +213,8 @@ const numberToCurrency = (number: number) => {
   return Number(number.toFixed(2)).toLocaleString("de-DE");
 };
 
-const StyledContainer = styled(Container)`
-  input[type="number"] {
-    text-align: right;
-  }
+const StyledContainer = styled.div`
+  padding: 0rem 5rem;
 `;
 
 const DisabledGrid = styled(Grid)<{ disabled: boolean }>`
