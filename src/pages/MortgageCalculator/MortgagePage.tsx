@@ -73,7 +73,7 @@ export const MortgagePage = () => {
             <Grid item xs={4}>
               <Slider
                 value={financingPercentage}
-                onChange={(e, value) => setFinancingPercentage(value as number)}
+                onChange={(_, value) => setFinancingPercentage(value as number)}
                 step={5}
                 marks={[
                   { value: 0, label: "0%" },
@@ -120,7 +120,7 @@ export const MortgagePage = () => {
               fullWidth
               value={type}
               exclusive
-              onChange={(e, value) => setType(value)}
+              onChange={(_, value) => setType(value)}
             >
               <ToggleButton value={"fixed"}>fijo</ToggleButton>
               <ToggleButton value={"variable"}>variable</ToggleButton>
