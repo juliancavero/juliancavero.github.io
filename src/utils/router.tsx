@@ -8,6 +8,7 @@ const router = createHashRouter([
     path: "/",
     element: <MainSkeleton />,
     children: [
+      { path: "/", element: <MortgagePage /> },
       { path: "/mortgage", element: <MortgagePage /> },
       { path: "/invest", element: <InvestmentPage /> },
     ],

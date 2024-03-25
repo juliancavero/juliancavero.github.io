@@ -22,7 +22,6 @@ export const MyOutlinedInput = ({
       endAdornment={
         <InputAdornment position="end">{endAdornment}</InputAdornment>
       }
-      type="number"
       disabled={disabled}
     />
   );

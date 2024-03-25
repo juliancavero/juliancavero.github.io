@@ -6,25 +6,36 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
-import styled from "styled-components";
+import DisabledGrid from "../../components/DisabledGrid";
+import MainContainer from "../../components/MainContainer";
+import { NumberCell } from "../../components/NumberCell";
+import { MyOutlinedInput } from "../../components/OutlinedInput";
+import { TitleCell } from "../../components/TitleCell";
 import { getEuribor } from "../../fetch/getEuribor";
-import { MyOutlinedInput } from "./components/OutlinedInput";
+import { numberToCurrency } from "../../utils/transformers";
+import { changeValue } from "../utils";
 
 type MortgageType = "fixed" | "variable";
 
 export const MortgagePage = () => {
-  const [totalPrice, setTotalPrice] = useState(100000);
-  const [financingPercentage, setFinancingPercentage] = useState(80);
-  const [term, setTerm] = useState(30);
-  const [interest, setInterest] = useState(3);
+  const [totalPrice, setTotalPrice] = useState("100000");
+  const [financingPercentage, setFinancingPercentage] = useState("80");
+  const [term, setTerm] = useState("30");
+  const [interest, setInterest] = useState("3");
   const [type, setType] = useState<MortgageType>("fixed");
-  const [euribor, setEuribor] = useState(0);
-  const [differential, setDifferential] = useState(1);
-  const financedPrice = totalPrice * (financingPercentage / 100);
+  const [euribor, setEuribor] = useState("0");
+  const [differential, setDifferential] = useState("1");
 
   const fetchEuribor = async () => {
     const response = await getEuribor();
-    setEuribor(response);
+    setEuribor(String(response));
+  };
+
+  const typeChange = (
+    _: React.MouseEvent<HTMLElement>,
+    value: MortgageType
+  ) => {
+    setType(value);
   };
 
   useEffect(() => {
@@ -32,48 +43,66 @@ export const MortgagePage = () => {
   }, []);
 
   const mortgageCalculations = useMemo(() => {
+    const ntotalPrice = Number(totalPrice);
+    const nfinancingPercentage = Number(financingPercentage);
+    const nterm = Number(term);
+    const ninterest = (1 + Number(interest) / 100) ** (1 / 12) - 1;
+    const neuribor = (1 + Number(euribor) / 100) ** (1 / 12) - 1;
+    const ndifferential = (1 + Number(differential) / 100) ** (1 / 12) - 1;
+
+    const financedPrice = ntotalPrice * (nfinancingPercentage / 100);
     const monthlyInterest =
-      type === "fixed" ? interest / 1200 : (euribor + differential) / 1200;
-    const months = term * 12;
+      type === "fixed" ? ninterest : neuribor + ndifferential;
+    const months = nterm * 12;
     const monthlyPayment =
       monthlyInterest > 0
         ? (financedPrice * monthlyInterest * (1 + monthlyInterest) ** months) /
           ((1 + monthlyInterest) ** months - 1)
         : financedPrice / months;
-    const finalPrice = monthlyPayment * months + (totalPrice - financedPrice);
-    const mortgageCost = finalPrice - totalPrice;
+    const finalPrice = monthlyPayment * months + (ntotalPrice - financedPrice);
+    const mortgageCost = finalPrice - ntotalPrice;
     return {
       monthlyPayment,
       finalPrice,
       mortgageCost,
     };
-  }, [differential, euribor, financedPrice, interest, term, totalPrice, type]);
+  }, [
+    differential,
+    euribor,
+    financingPercentage,
+    interest,
+    term,
+    totalPrice,
+    type,
+  ]);
 
   return (
-    <StyledContainer>
+    <MainContainer>
       <h1>Calculadora de hipotecas</h1>
       <Grid container spacing={5} alignItems={"flex-start"}>
         <Grid container item xs={12} lg={6} alignItems={"center"} spacing={2}>
-          <Grid item xs={12} container alignItems={"center"}>
+          <Grid item xs={12} container alignItems={"center"} spacing={3}>
             <Grid item xs={5}>
-              <Typography variant="h5">Precio del inmueble</Typography>
+              <TitleCell title="Precio del inmueble" />
             </Grid>
             <Grid item xs={7}>
               <MyOutlinedInput
                 value={totalPrice}
-                onChange={(e) => setTotalPrice(Number(e.target.value))}
-                endAdornment={"€"}
+                onChange={(e) => changeValue(e, setTotalPrice, 0)}
+                endAdornment="€"
               />
             </Grid>
           </Grid>
           <Grid item xs={12} container spacing={3} alignItems={"center"}>
             <Grid item xs={5}>
-              <Typography variant="h5">Porcentaje de financiación</Typography>
+              <TitleCell title="Porcentaje de financiación" secondary />
             </Grid>
             <Grid item xs={4}>
               <Slider
-                value={financingPercentage}
-                onChange={(_, value) => setFinancingPercentage(value as number)}
+                value={Number(financingPercentage)}
+                onChange={(_, value) =>
+                  setFinancingPercentage(value as unknown as string)
+                }
                 step={5}
                 marks={[
                   { value: 0, label: "0%" },
@@ -85,32 +114,32 @@ export const MortgagePage = () => {
             <Grid item xs={3}>
               <MyOutlinedInput
                 value={financingPercentage}
-                onChange={(e) => setFinancingPercentage(Number(e.target.value))}
+                onChange={(e) => changeValue(e, setFinancingPercentage, 0)}
                 endAdornment={"%"}
               />
             </Grid>
           </Grid>
-          <Grid item xs={12} container alignItems={"center"}>
+          <Grid item xs={12} container alignItems={"center"} spacing={3}>
             <Grid item xs={5}>
-              <Typography variant="h5">Plazo</Typography>
+              <TitleCell title="Plazo" />
             </Grid>
             <Grid item xs={7}>
               <MyOutlinedInput
                 value={term}
-                onChange={(e) => setTerm(Number(e.target.value))}
+                onChange={(e) => changeValue(e, setTerm, 1)}
                 endAdornment={"años"}
               />
             </Grid>
           </Grid>
-          <Grid item xs={12} container>
+          <Grid item xs={12} container spacing={3}>
             <DisabledGrid item xs={5} disabled={type === "variable"}>
-              <Typography variant="h5">Tipo de interés anual</Typography>
+              <TitleCell title="Tipo de interés anual" secondary />
             </DisabledGrid>
             <Grid item xs={7}>
               <MyOutlinedInput
                 disabled={type === "variable"}
                 value={interest}
-                onChange={(e) => setInterest(Number(e.target.value))}
+                onChange={(e) => changeValue(e, setInterest)}
                 endAdornment={"%"}
               />
             </Grid>
@@ -120,7 +149,7 @@ export const MortgagePage = () => {
               fullWidth
               value={type}
               exclusive
-              onChange={(_, value) => setType(value)}
+              onChange={typeChange}
             >
               <ToggleButton value={"fixed"}>fijo</ToggleButton>
               <ToggleButton value={"variable"}>variable</ToggleButton>
@@ -134,7 +163,7 @@ export const MortgagePage = () => {
               <Grid item xs={7}>
                 <MyOutlinedInput
                   value={euribor}
-                  onChange={(e) => setEuribor(Number(e.target.value))}
+                  onChange={(e) => changeValue(e, setEuribor)}
                   endAdornment={"%"}
                 />
               </Grid>
@@ -144,7 +173,7 @@ export const MortgagePage = () => {
               <Grid item xs={7}>
                 <MyOutlinedInput
                   value={differential}
-                  onChange={(e) => setDifferential(Number(e.target.value))}
+                  onChange={(e) => changeValue(e, setDifferential)}
                   endAdornment={"%"}
                 />
               </Grid>
@@ -156,68 +185,44 @@ export const MortgagePage = () => {
             <Typography variant="h4">Resultados</Typography>
           </Grid>
           <Grid container item xs={12} alignItems={"center"}>
-            <Grid item xs={6}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="h4">Cuota mensual</Typography>
             </Grid>
-            <Grid
-              item
-              xs={6}
-              justifyContent={"flex-end"}
-              container
-              sx={{ backgroundColor: "#acb79b" }}
-            >
-              <Typography variant="h3">
-                {numberToCurrency(mortgageCalculations.monthlyPayment)}€
-              </Typography>
+            <Grid item xs={12} lg={6} justifyContent={"flex-end"} container>
+              <NumberCell
+                value={`${numberToCurrency(
+                  mortgageCalculations.monthlyPayment
+                )}€`}
+                color="darkgreen"
+              />
             </Grid>
           </Grid>
           <Grid container item xs={12} alignItems={"center"}>
-            <Grid item xs={6}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="h5">Coste total del inmueble</Typography>
             </Grid>
-            <Grid
-              item
-              xs={6}
-              justifyContent={"flex-end"}
-              container
-              sx={{ backgroundColor: "#8fbc8f" }}
-            >
-              <Typography variant="h4">
-                {numberToCurrency(mortgageCalculations.finalPrice)}€
-              </Typography>
+            <Grid item xs={12} lg={6} justifyContent={"flex-end"} container>
+              <NumberCell
+                value={`${numberToCurrency(mortgageCalculations.finalPrice)}€`}
+                color="green"
+              />
             </Grid>
           </Grid>
           <Grid container item xs={12} alignItems={"center"}>
-            <Grid item xs={6}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="h5">Coste de la hipoteca</Typography>
             </Grid>
-            <Grid
-              item
-              xs={6}
-              justifyContent={"flex-end"}
-              container
-              sx={{ backgroundColor: "#acb79b" }}
-            >
-              <Typography variant="h4">
-                {numberToCurrency(mortgageCalculations.mortgageCost)}€
-              </Typography>
+            <Grid item xs={12} lg={6} justifyContent={"flex-end"} container>
+              <NumberCell
+                value={`${numberToCurrency(
+                  mortgageCalculations.mortgageCost
+                )}€`}
+                color="green"
+              />
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </StyledContainer>
+    </MainContainer>
   );
 };
-
-const numberToCurrency = (number: number) => {
-  return Number(number.toFixed(2)).toLocaleString("de-DE");
-};
-
-const StyledContainer = styled.div`
-  padding: 0rem 5rem;
-`;
-
-const DisabledGrid = styled(Grid)<{ disabled: boolean }>`
-  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
-  pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
-`;
