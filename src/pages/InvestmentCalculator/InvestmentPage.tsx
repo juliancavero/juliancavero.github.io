@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import MainContainer from "../../components/MainContainer";
 import { NumberCell } from "../../components/NumberCell";
 import { MyOutlinedInput } from "../../components/OutlinedInput";
+import { RTypography } from "../../components/RTypography";
 import { TitleCell } from "../../components/TitleCell";
 import { numberToCurrency } from "../../utils/transformers";
 import { changeValue } from "../utils";
@@ -93,7 +94,7 @@ export const InvestmentPage = () => {
           </Grid>
           <Grid container item xs={12} alignItems={"center"} spacing={3}>
             <Grid item xs={12} lg={6}>
-              <Typography variant="h4">Valor final en {term} años</Typography>
+              <RTypography>Valor final en {term} años</RTypography>
             </Grid>
             <Grid item xs={12} lg={6} justifyContent={"flex-end"} container>
               <NumberCell
@@ -106,7 +107,7 @@ export const InvestmentPage = () => {
           </Grid>
           <Grid container item xs={12} alignItems={"center"} spacing={3}>
             <Grid item xs={12} lg={6}>
-              <Typography variant="h5">Ganancias de la inversión</Typography>
+              <RTypography>Ganancias de la inversión</RTypography>
             </Grid>
             <Grid item xs={12} lg={6} justifyContent={"flex-end"} container>
               <NumberCell

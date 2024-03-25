@@ -1,4 +1,5 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import { BigRTypography } from "./RTypography";
 
 type NumberCellType = {
   value: string;
@@ -24,7 +25,7 @@ export const NumberCell = ({ value, color }: NumberCellType) => {
             : "red",
       }}
     >
-      <Typography variant="h4">{value}</Typography>
+      <BigRTypography>{value}</BigRTypography>
     </Box>
   );
 };

@@ -10,6 +10,7 @@ import DisabledGrid from "../../components/DisabledGrid";
 import MainContainer from "../../components/MainContainer";
 import { NumberCell } from "../../components/NumberCell";
 import { MyOutlinedInput } from "../../components/OutlinedInput";
+import { RTypography } from "../../components/RTypography";
 import { TitleCell } from "../../components/TitleCell";
 import { getEuribor } from "../../fetch/getEuribor";
 import { numberToCurrency } from "../../utils/transformers";
@@ -158,7 +159,7 @@ export const MortgagePage = () => {
           {type === "variable" && (
             <Grid item xs={12} container spacing={2} alignItems={"center"}>
               <Grid item xs={5}>
-                <Typography variant="h5">Euribor</Typography>
+                <RTypography>Euribor</RTypography>
               </Grid>
               <Grid item xs={7}>
                 <MyOutlinedInput
@@ -168,7 +169,7 @@ export const MortgagePage = () => {
                 />
               </Grid>
               <Grid item xs={5}>
-                <Typography variant="h5">Diferencial</Typography>
+                <RTypography>Diferencial</RTypography>
               </Grid>
               <Grid item xs={7}>
                 <MyOutlinedInput
@@ -186,7 +187,7 @@ export const MortgagePage = () => {
           </Grid>
           <Grid container item xs={12} alignItems={"center"}>
             <Grid item xs={12} lg={6}>
-              <Typography variant="h4">Cuota mensual</Typography>
+              <RTypography>Cuota mensual</RTypography>
             </Grid>
             <Grid item xs={12} lg={6} justifyContent={"flex-end"} container>
               <NumberCell
@@ -199,7 +200,7 @@ export const MortgagePage = () => {
           </Grid>
           <Grid container item xs={12} alignItems={"center"}>
             <Grid item xs={12} lg={6}>
-              <Typography variant="h5">Coste total del inmueble</Typography>
+              <RTypography>Coste total del inmueble</RTypography>
             </Grid>
             <Grid item xs={12} lg={6} justifyContent={"flex-end"} container>
               <NumberCell
@@ -210,7 +211,7 @@ export const MortgagePage = () => {
           </Grid>
           <Grid container item xs={12} alignItems={"center"}>
             <Grid item xs={12} lg={6}>
-              <Typography variant="h5">Coste de la hipoteca</Typography>
+              <RTypography>Coste de la hipoteca</RTypography>
             </Grid>
             <Grid item xs={12} lg={6} justifyContent={"flex-end"} container>
               <NumberCell

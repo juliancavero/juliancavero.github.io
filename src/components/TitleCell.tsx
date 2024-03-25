@@ -1,4 +1,5 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import { RTypography } from "./RTypography";
 
 type TitleCellProps = {
   title: string;
@@ -18,7 +19,7 @@ export const TitleCell = ({ title, secondary = false }: TitleCellProps) => {
         borderRadius: 2,
       }}
     >
-      <Typography variant="h5">{title}</Typography>
+      <RTypography>{title}</RTypography>
     </Box>
   );
 };
