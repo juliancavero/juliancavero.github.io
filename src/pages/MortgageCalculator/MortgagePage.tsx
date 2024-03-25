@@ -47,9 +47,9 @@ export const MortgagePage = () => {
     const ntotalPrice = Number(totalPrice);
     const nfinancingPercentage = Number(financingPercentage);
     const nterm = Number(term);
-    const ninterest = (1 + Number(interest) / 100) ** (1 / 12) - 1;
-    const neuribor = (1 + Number(euribor) / 100) ** (1 / 12) - 1;
-    const ndifferential = (1 + Number(differential) / 100) ** (1 / 12) - 1;
+    const ninterest = Number(interest) / 1200;
+    const neuribor = Number(euribor) / 100;
+    const ndifferential = Number(differential) / 100;
 
     const financedPrice = ntotalPrice * (nfinancingPercentage / 100);
     const monthlyInterest =
