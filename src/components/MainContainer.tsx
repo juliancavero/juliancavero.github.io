@@ -1,7 +1,6 @@
+import { Container } from "@mui/material";
 import styled from "styled-components";
 
-const MainContainer = styled.div`
-  padding: 0rem 5rem;
-`;
+const MainContainer = styled(Container)``;
 
 export default MainContainer;
