@@ -1,6 +1,5 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, styled } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
-import styled from "styled-components";
 
 export const MainSkeleton = () => {
   const navigate = useNavigate();
@@ -13,16 +12,27 @@ export const MainSkeleton = () => {
     navigate("/invest");
   };
 
+  const handleSanitasClick = () => {
+    navigate("/check-sanitas");
+  };
+
   return (
     <Grid container>
       <Grid item xs={12} lg={2}>
-        <StyledDrawer column fullHeight display={{ xs: "none", lg: "flex" }}>
+        <StyledDrawer
+          column={true}
+          fullHeight
+          display={{ xs: "none", lg: "flex" }}
+        >
           <h1>Utils</h1>
           <StyledDrawerItem onClick={handleMortgageClick}>
             Calculadora de hipotecas
           </StyledDrawerItem>
           <StyledDrawerItem onClick={handleInvestClick}>
             Calculadora de inversiones
+          </StyledDrawerItem>
+          <StyledDrawerItem onClick={handleSanitasClick}>
+            Comprobar cita Sanitas
           </StyledDrawerItem>
         </StyledDrawer>
         <StyledDrawer
@@ -38,6 +48,9 @@ export const MainSkeleton = () => {
           <StyledDrawerItem onClick={handleInvestClick}>
             Calculadora de inversiones
           </StyledDrawerItem>
+          <StyledDrawerItem onClick={handleSanitasClick}>
+            Comprobar cita Sanitas
+          </StyledDrawerItem>
         </StyledDrawer>
       </Grid>
       <Grid item xs={12} lg={10}>
@@ -49,7 +62,9 @@ export const MainSkeleton = () => {
   );
 };
 
-const StyledDrawer = styled(Box)<{ fullHeight?: boolean; column?: boolean }>`
+const StyledDrawer = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "fullHeight" && prop !== "column",
+})<{ fullHeight?: boolean; column?: boolean }>`
   background-color: #c3b2de;
   display: flex;
   flex-direction: ${({ column }) => (column ? "column" : "row")};
