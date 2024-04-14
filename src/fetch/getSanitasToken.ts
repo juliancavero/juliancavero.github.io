@@ -11,13 +11,12 @@ export const getSanitasToken = async () => {
     method: "POST",
     body: JSON.stringify({
       applicationId: "MSApp",
-      login: "17468568E",
+      login: import.meta.env.VITE_SAN_USER,
       remember: false,
-      password: "Diciembre1995",
+      password: import.meta.env.VITE_PASS,
     }),
     headers: {
-      Authorization:
-        "Basic OUxNTUViVzZJUGNEM2diVVY4dWxhWnBjQmVkOWlHaks6M3B2SHo0TEo4UzJaM2NlVg==",
+      Authorization: import.meta.env.VITE_SAN_TOKEN_AUTH,
       "Content-Type": "application/json",
     },
   });
