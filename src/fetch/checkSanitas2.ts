@@ -3,9 +3,9 @@ import moment from "moment";
 
 type Response = {
   estado: string;
-  throwing: any;
+  throwing: unknown;
   fieldsToTranslate: string[];
-  result?: any[];
+  result?: unknown[];
 };
 
 const URL =
