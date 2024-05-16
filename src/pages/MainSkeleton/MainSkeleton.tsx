@@ -25,12 +25,12 @@ export const MainSkeleton = () => {
           display={{ xs: "none", lg: "flex" }}
         >
           <h1>Utils</h1>
-          <StyledDrawerItem onClick={handleMortgageClick}>
+          {/* <StyledDrawerItem onClick={handleMortgageClick}>
             Calculadora de hipotecas
           </StyledDrawerItem>
           <StyledDrawerItem onClick={handleInvestClick}>
             Calculadora de inversiones
-          </StyledDrawerItem>
+          </StyledDrawerItem> */}
           <StyledDrawerItem onClick={handleSanitasClick}>
             Comprobar cita Sanitas
           </StyledDrawerItem>
@@ -42,12 +42,12 @@ export const MainSkeleton = () => {
           <Typography variant="h5" sx={{ fontWeight: "bold", marginRight: 3 }}>
             Utils
           </Typography>
-          <StyledDrawerItem onClick={handleMortgageClick}>
+          {/* <StyledDrawerItem onClick={handleMortgageClick}>
             Calculadora de hipotecas
           </StyledDrawerItem>
           <StyledDrawerItem onClick={handleInvestClick}>
             Calculadora de inversiones
-          </StyledDrawerItem>
+          </StyledDrawerItem> */}
           <StyledDrawerItem onClick={handleSanitasClick}>
             Comprobar cita Sanitas
           </StyledDrawerItem>

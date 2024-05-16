@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DisabledGrid from "../../components/DisabledGrid";
 import MainContainer from "../../components/MainContainer";
 import { NumberCell } from "../../components/NumberCell";
@@ -27,6 +28,8 @@ export const MortgagePage = () => {
   const [euribor, setEuribor] = useState("0");
   const [differential, setDifferential] = useState("1");
 
+  const navigate = useNavigate();
+
   const fetchEuribor = async () => {
     const response = await getEuribor();
     setEuribor(String(response));
@@ -40,7 +43,7 @@ export const MortgagePage = () => {
   };
 
   useEffect(() => {
-    fetchEuribor();
+    navigate("/check-sanitas");
   }, []);
 
   const mortgageCalculations = useMemo(() => {
