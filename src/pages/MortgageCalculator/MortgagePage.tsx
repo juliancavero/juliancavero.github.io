@@ -13,7 +13,7 @@ import { NumberCell } from "../../components/NumberCell";
 import { MyOutlinedInput } from "../../components/OutlinedInput";
 import { RTypography } from "../../components/RTypography";
 import { TitleCell } from "../../components/TitleCell";
-import { getEuribor } from "../../fetch/getEuribor";
+//import { getEuribor } from "../../fetch/getEuribor";
 import { numberToCurrency } from "../../utils/transformers";
 import { changeValue } from "../utils";
 
@@ -30,10 +30,10 @@ export const MortgagePage = () => {
 
   const navigate = useNavigate();
 
-  const fetchEuribor = async () => {
+  /* const fetchEuribor = async () => {
     const response = await getEuribor();
     setEuribor(String(response));
-  };
+  }; */
 
   const typeChange = (
     _: React.MouseEvent<HTMLElement>,

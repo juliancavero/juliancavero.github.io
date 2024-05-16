@@ -4,13 +4,13 @@ import { Outlet, useNavigate } from "react-router-dom";
 export const MainSkeleton = () => {
   const navigate = useNavigate();
 
-  const handleMortgageClick = () => {
+  /* const handleMortgageClick = () => {
     navigate("/mortgage");
   };
 
   const handleInvestClick = () => {
     navigate("/invest");
-  };
+  }; */
 
   const handleSanitasClick = () => {
     navigate("/check-sanitas");
