@@ -6,10 +6,7 @@ const router = createHashRouter([
   {
     path: "/",
     element: <MainSkeleton />,
-    children: [
-      { path: "/", element: <MortgagePage /> },
-      { path: "*", element: <MortgagePage /> },
-    ],
+    children: [{ path: "/", element: <MortgagePage /> }],
   },
 ]);
 
