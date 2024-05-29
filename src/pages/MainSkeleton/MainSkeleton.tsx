@@ -1,21 +1,7 @@
 import { Box, Grid, Typography, styled } from "@mui/material";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 export const MainSkeleton = () => {
-  const navigate = useNavigate();
-
-  /* const handleMortgageClick = () => {
-    navigate("/mortgage");
-  };
-
-  const handleInvestClick = () => {
-    navigate("/invest");
-  }; */
-
-  const handleSanitasClick = () => {
-    navigate("/check-sanitas");
-  };
-
   return (
     <Grid container>
       <Grid item xs={12} lg={2}>
@@ -24,33 +10,15 @@ export const MainSkeleton = () => {
           fullHeight
           display={{ xs: "none", lg: "flex" }}
         >
-          <h1>Utils</h1>
-          {/* <StyledDrawerItem onClick={handleMortgageClick}>
-            Calculadora de hipotecas
-          </StyledDrawerItem>
-          <StyledDrawerItem onClick={handleInvestClick}>
-            Calculadora de inversiones
-          </StyledDrawerItem> */}
-          <StyledDrawerItem onClick={handleSanitasClick}>
-            Comprobar cita Sanitas
-          </StyledDrawerItem>
+          <h1>Quack</h1>
         </StyledDrawer>
         <StyledDrawer
           display={{ xs: "flex", lg: "none" }}
           alignItems={"center"}
         >
           <Typography variant="h5" sx={{ fontWeight: "bold", marginRight: 3 }}>
-            Utils
+            Quack
           </Typography>
-          {/* <StyledDrawerItem onClick={handleMortgageClick}>
-            Calculadora de hipotecas
-          </StyledDrawerItem>
-          <StyledDrawerItem onClick={handleInvestClick}>
-            Calculadora de inversiones
-          </StyledDrawerItem> */}
-          <StyledDrawerItem onClick={handleSanitasClick}>
-            Comprobar cita Sanitas
-          </StyledDrawerItem>
         </StyledDrawer>
       </Grid>
       <Grid item xs={12} lg={10}>
@@ -75,14 +43,4 @@ const StyledDrawer = styled(Box, {
 
 const StyledMainContent = styled(Box)`
   padding: 1rem;
-`;
-
-const StyledDrawerItem = styled(Box)`
-  padding: 0.5rem;
-  cursor: pointer;
-  border-radius: 0.5rem;
-  border: 1px solid #987bc5;
-  &:hover {
-    background-color: #dda0dd;
-  }
 `;
