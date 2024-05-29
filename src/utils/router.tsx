@@ -1,6 +1,4 @@
 import { RouterProvider, createHashRouter } from "react-router-dom";
-import { APICheckWrapper } from "../pages/APICheck/APICheckPage";
-import { InvestmentPage } from "../pages/InvestmentCalculator/InvestmentPage";
 import { MainSkeleton } from "../pages/MainSkeleton/MainSkeleton";
 import { MortgagePage } from "../pages/MortgageCalculator/MortgagePage";
 
@@ -10,9 +8,7 @@ const router = createHashRouter([
     element: <MainSkeleton />,
     children: [
       { path: "/", element: <MortgagePage /> },
-      { path: "/mortgage", element: <MortgagePage /> },
-      { path: "/invest", element: <InvestmentPage /> },
-      { path: "/check-sanitas", element: <APICheckWrapper /> },
+      { path: "*", element: <MortgagePage /> },
     ],
   },
 ]);
